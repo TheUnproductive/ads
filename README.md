@@ -28,7 +28,7 @@ This directory has been forked from https://github.com/stackbuffer/ads - all cre
 
 ## Donations
 
-If you enjoy my work, why not buy me a coffee?    
+If you enjoy my work, why not buy me a coffee?      
 [![paypal](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=K5KVUTX6HJHXU)
 
 Of course, if you choose to enjoy it for free, I also appreciate it.
