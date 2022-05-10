@@ -1,4 +1,4 @@
-# ADS - Audio Data Storage
+# ADS-JMS - Audio Data Storage
 
 currently it can generate `WAV` files using `generatewav.py` file with different sampling rates and frequencies.
 
