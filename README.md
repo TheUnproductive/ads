@@ -4,6 +4,10 @@ currently it can generate `WAV` files using `generatewav.py` file and can decode
 
 still need to implement error detection methods such as CRC
 
+## Usage
+
+To install the needed packages, type `pip install -r req.txt` (or use `pip3` for python3).
+
 ## To-Do
 
  - Figure out maximum usable frequency
