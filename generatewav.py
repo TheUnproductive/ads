@@ -27,7 +27,7 @@ start_sequence = 1800.0   # start frequencies
 stop_sequence = 3600.0    # stop frequency
 
 
-ms = 10; #milliseconds between each bit
+ms = 5; #milliseconds between each bit
 samples = rate//(1000//ms)
 
 if f1 > rate//2 or f2 > rate//2:
