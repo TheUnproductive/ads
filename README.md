@@ -16,7 +16,7 @@ To install the needed packages, type `pip install -r req.txt` (or use `pip3` for
  - Figure out usage of multiple channels
  - Implant data stream into audio file
  - Extract data stream from audio file
- - Error Detection
+ - Error Detection (only applicable to decoding)
  - (Potential encoding and decoding)
 
 ## Credits
