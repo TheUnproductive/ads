@@ -26,7 +26,7 @@ stop_sequence = 3600.0    # stop frequency
 ms = 10; #milliseconds between each bit
 samples = rate//(1000//ms)
 
-if f2 > rate//2:
+if f1 > rate//2 or f2 > rate//2:
 	print("Error, maximum frequency exceeds " + str(rate/2))
 	exit()
 
