@@ -10,7 +10,7 @@ To install the needed packages, type `pip install -r req.txt` (or use `pip3` for
 
 ## To-Do
 
- - Create header to disatinguish filetypes and frequencys used
+ - Create header to distinguish filetypes and frequencys used
  - Figure out maximum usable frequency
  - Figure out maximum usable sample rate
  - Figure out usage of multiple channels
