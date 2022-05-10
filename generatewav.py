@@ -1,26 +1,20 @@
+from fileinput import filename
 import wavio
 import numpy as np
 import argparse
 
 
 parser = argparse.ArgumentParser(description="Start DoorPi with certain options")
-parser.add_argument("-r", action="store", dest='rate', type=int, 
-	help="Set sampling rate")
-parser.add_argument("-n", action="store", dest='name', type=str,
+parser.add_argument("-r", action="store", dest='rate', type=int, default=44100,
+	help="Set sampling rate")	# samples per second, every second 44100 samples are used, for 100ms --> 44100/(1000/100)
+parser.add_argument("-n", action="store", dest='name', type=str, default="h",
     help="Manually configure filename")
 parser.add_argument("-d", action="store", dest="data", type=str,
     help="Input data to transform")
 args = parser.parse_args()
 
-if args.name:
-	filename = args.name
-else:
-	filename = "h"
-
-if args.rate:
-	rate = args.rate
-else:
-	rate = 44100  # samples per second, every second 44100 samples are used, for 100ms --> 44100/(1000/100)
+rate = args.rate
+filename = args.name
 
 T = 1         # sample duration for each bit (seconds), can be changed using the ms down below
 f1 = 1200.0   # sound frequency (Hz) for 0 bit
