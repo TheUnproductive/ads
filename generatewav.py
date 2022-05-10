@@ -18,17 +18,17 @@ stop_sequence = 3600.0    # stop frequency
 
 
 ms = 10; #milliseconds between each bit
-samples = 44100//(1000//ms)
+samples = rate//(1000//ms)
 
 x = []
 l = []
 
 #------------------------------------------------------------------------------
-#start sequence with 1800hz
+# start sequence with 1800hz
 t = np.linspace(0, T, T*rate, endpoint=False)
 x.append(np.sin(2*np.pi * start_sequence * t[:samples]))
 
-
+# transform bitstream to corresponding frequency 
 for i in binout:
 	t = np.linspace(0, T, T*rate, endpoint=False)
 	if i == '0':
@@ -37,7 +37,7 @@ for i in binout:
 		x.append(np.sin(2*np.pi * f2 * t[:samples]))
 
 
-#end sequence with 4000hz
+# end sequence with 4000hz
 t = np.linspace(0, T, T*rate, endpoint=False)
 x.append(np.sin(2*np.pi * stop_sequence * t[:samples]))
 t = np.linspace(0, T, T*rate, endpoint=False)
