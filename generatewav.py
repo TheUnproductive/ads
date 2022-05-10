@@ -2,6 +2,7 @@ from fileinput import filename
 import wavio
 import numpy as np
 import argparse
+import header as hd
 
 
 parser = argparse.ArgumentParser(description="Start DoorPi with certain options")
@@ -19,10 +20,16 @@ parser.add_argument("-start", action="store", dest="start", type=float, default=
     help="Input high bit frequency")
 parser.add_argument("-stop", action="store", dest="stop", type=float, default=3600.0,
     help="Input high bit frequency")
+parser.add_argument("-head", action="store", dest="header", type=str, default="standard", 
+	help="Choose which header to use")
+parser.add_argument("-t", action="store", dest="type", type=str, default="text",
+    help="Define the filetype to put in the custom header")
 args = parser.parse_args()
 
+head = args.header
 rate = args.rate
 filename = args.name
+file = args.type
 
 T = 1         # sample duration for each bit (seconds), can be changed using the ms down below
 f1 = args.f1   # sound frequency (Hz) for 0 bit
@@ -52,8 +59,17 @@ l = []
 
 #------------------------------------------------------------------------------
 # start sequence with 1800hz
-t = np.linspace(0, T, T*rate, endpoint=False)
-x.append(np.sin(2*np.pi * start_sequence * t[:samples]))
+hd.start(T, rate, x, start_sequence, samples)
+
+if head == "standard":
+	hd.standard(T, rate, x, f1, f2, samples)
+	hd.start(T, rate, x, start_sequence, samples)
+elif head == "short":
+	hd.short(T, rate, x, f1, f2, samples)
+	hd.start(T, rate, x, start_sequence, samples)
+elif head == "custom":
+	hd.custom(T, rate, x, f1, f2, file, samples)
+	hd.start(T, rate, x, start_sequence, samples)
 
 # transform bitstream to corresponding frequency 
 for i in binout:
@@ -65,12 +81,7 @@ for i in binout:
 
 
 # end sequence with 4000hz
-t = np.linspace(0, T, T*rate, endpoint=False)
-x.append(np.sin(2*np.pi * stop_sequence * t[:samples]))
-t = np.linspace(0, T, T*rate, endpoint=False)
-x.append(np.sin(2*np.pi * stop_sequence * t[:samples]))
-t = np.linspace(0, T, T*rate, endpoint=False)
-x.append(np.sin(2*np.pi * stop_sequence * t[:samples]))
+hd.stop(T, rate, x, stop_sequence, samples)
 #------------------------------------------------------------------------------
 
 for i in x:
