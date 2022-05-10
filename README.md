@@ -12,7 +12,7 @@ still need to implement error detection methods such as CRC
  - Implant data stream into audio file
  - Extract data stream from audio file
  - Error Detection
-( - Possible encoding and decoding)
+ - (Potential encoding and decoding)
 
 ## Credits
 
