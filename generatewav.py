@@ -11,14 +11,18 @@ parser.add_argument("-n", action="store", dest='name', type=str, default="h",
     help="Manually configure filename")
 parser.add_argument("-d", action="store", dest="data", type=str,
     help="Input data to transform")
+parser.add_argument("-f1", action="store", dest="f1", type=float, default=1200.0,
+    help="Input low bit frequency")
+parser.add_argument("-f2", action="store", dest="f2", type=float, default=2600.0,
+    help="Input high bit frequency")
 args = parser.parse_args()
 
 rate = args.rate
 filename = args.name
 
 T = 1         # sample duration for each bit (seconds), can be changed using the ms down below
-f1 = 1200.0   # sound frequency (Hz) for 0 bit
-f2 = 44000.0   # sound frequency (Hz) for 1 bit
+f1 = args.f1   # sound frequency (Hz) for 0 bit
+f2 = args.f2   # sound frequency (Hz) for 1 bit
 start_sequence = 1800.0   # start frequencies
 stop_sequence = 3600.0    # stop frequency
 

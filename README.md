@@ -1,6 +1,6 @@
 # ADS - Audio Data Storage
 
-currently it can generate `WAV` files using `generatewav.py` file and can decode bit at a rate of `10ms per bit`
+currently it can generate `WAV` files using `generatewav.py` file with different sampling rates and frequencies.
 
 still need to implement error detection methods such as CRC
 
