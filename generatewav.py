@@ -15,6 +15,10 @@ parser.add_argument("-f1", action="store", dest="f1", type=float, default=1200.0
     help="Input low bit frequency")
 parser.add_argument("-f2", action="store", dest="f2", type=float, default=2600.0,
     help="Input high bit frequency")
+parser.add_argument("-start", action="store", dest="start", type=float, default=1800.0,
+    help="Input high bit frequency")
+parser.add_argument("-stop", action="store", dest="stop", type=float, default=3600.0,
+    help="Input high bit frequency")
 args = parser.parse_args()
 
 rate = args.rate
@@ -23,8 +27,8 @@ filename = args.name
 T = 1         # sample duration for each bit (seconds), can be changed using the ms down below
 f1 = args.f1   # sound frequency (Hz) for 0 bit
 f2 = args.f2   # sound frequency (Hz) for 1 bit
-start_sequence = 1800.0   # start frequencies
-stop_sequence = 3600.0    # stop frequency
+start_sequence = args.start   # start frequencies
+stop_sequence = args.stop    # stop frequency
 
 
 ms = 5; #milliseconds between each bit
@@ -38,7 +42,6 @@ if args.data:
 	s = args.data
 else:
 	s = input("Enter your data: ")
-	s += '.'
 
 print("Input Stream: " + (''.join(map(bin,bytearray(s, 'utf-8')))) + "\n")
 binout = ((''.join(map(bin,bytearray(s, 'utf-8')))).replace("b", "")).replace(" ", "")
