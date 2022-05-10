@@ -22,3 +22,8 @@ To install the needed packages, type `pip install -r req.txt` (or use `pip3` for
 ## Credits
 
 This directory has been forked from https://github.com/stackbuffer/ads - all credits for the initial release go to him
+
+
+## Donations
+
+[![paypal](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=K5KVUTX6HJHXU)
