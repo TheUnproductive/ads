@@ -4,6 +4,16 @@ currently it can generate `WAV` files using `generatewav.py` file and can decode
 
 still need to implement error detection methods such as CRC
 
+## To-Do
+
+ - Figure out maximum usable frequency
+ - Figure out maximum usable sample rate
+ - Figure out usage of multiple channels
+ - Implant data stream into audio file
+ - Extract data stream from audio file
+ - Error Detection
+( - Possible encoding and decoding)
+
 ## Credits
 
 This directory has been forked from https://github.com/stackbuffer/ads - all credits for the initial release go to him
