@@ -6,7 +6,10 @@ still need to implement error detection methods such as CRC
 
 ## Usage
 
-To install the needed packages, type `pip install -r req.txt` (or use `pip3` for python3).   
+To install the needed packages, type `pip install -r req.txt` (or use `pip3` for python3). 
+
+Also you will need to make sure to have ffmpeg and ffprobe installed.
+
 If you want to use sine waves above human hearing, the sampling rate needs to comply with the frequency you are using, eg.: If you want to use frequencies above 22 kHz the sampling rate has to be comply to `sampling_rate = maximum_frequency * 2`. Currently the output has to be combined manually, but i am looking for an option to automate this process.
 
 ## Header Types
