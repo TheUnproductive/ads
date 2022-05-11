@@ -7,15 +7,14 @@ from pydub import AudioSegment
 
 def combine(input_file, inject_file, output_file):
 	sound1 = AudioSegment.from_file(input_file)
-	sound2 = AudioSegment.from_file(inject_file)
+	inject_raw = AudioSegment.from_file(inject_file)
+	sound2 = inject_raw - 55
 	combined = sound1.overlay(sound2)
 	combined.export(output_file, format='wav')
 
 parser = argparse.ArgumentParser(description="Start DoorPi with certain options")
 parser.add_argument("-r", action="store", dest='rate', type=int, default=44100,
 	help="Set sampling rate")	# samples per second, every second 44100 samples are used, for 100ms --> 44100/(1000/100)
-parser.add_argument("-n", action="store", dest='name', type=str, default="h.wav",
-    help="Manually configure filename")
 parser.add_argument("-d", action="store", dest="data", type=str,
     help="Input data to transform")
 parser.add_argument("-f1", action="store", dest="f1", type=float, default=2.0,
@@ -32,7 +31,6 @@ args = parser.parse_args()
 
 head = args.header
 rate = args.rate
-filename = args.name
 file = args.type
 
 T = 1         				# sample duration for each bit (seconds), can be changed using the ms down below
@@ -105,7 +103,7 @@ for i in x:
 l = np.array(l)
 
 if args.input:
-	wavio.write(filename, l, rate, sampwidth=2)
-	combine(args.input, filename, args.output)
+	wavio.write(args.output, l, rate, sampwidth=2)
+	combine(args.input, args.output, args.output)
 else:
-	wavio.write(filename, l, rate, sampwidth=2)
+	wavio.write(args.output, l, rate, sampwidth=2)
