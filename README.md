@@ -33,6 +33,8 @@ It will create a header with data as follows:
 
 The header_ending currently is just the start_sequence repeated.
 
+Space required (with default values): 95.8 KB
+
 ## To-Do
 
  - [x] Create header to distinguish filetypes and frequencys used (implemented as `custom` header)
