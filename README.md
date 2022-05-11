@@ -49,6 +49,8 @@ Space required (with default values): 95.8 KB
 
 Some form of error detection comes with the custom header, since we use a predefined standard to store information like High-Bit / Low-Bit frequencies, sampling rate and sample duration.
 
+Note: Implanting works, but the implanted audio is very loud, a way to lower the volume still has to be found
+
 ## Supported Filetypes
 
  - [x] Text: txt
