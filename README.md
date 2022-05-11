@@ -21,6 +21,8 @@ If you want to use sine waves above human hearing, the sampling rate needs to co
  - [ ] Error Detection (only applicable to decoding)
  - [ ] (Potential encoding and decoding)
 
+Some form of error detection comes with the custom header, since we use a predefined standard to store information like High-Bit / Low-Bit frequencies, sampling rate and sample duration.
+
 ## Credits
 
 This directory has been forked from https://github.com/stackbuffer/ads - all credits for the initial release go to him
