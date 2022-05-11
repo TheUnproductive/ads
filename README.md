@@ -41,8 +41,8 @@ Space required (with default values): 95.8 KB
  - [ ] Implement different filetypes to encode
  - [ ] Figure out maximum usable sample rate and frequency
  - [ ] Figure out usage of multiple channels
- - [ ] Implant data stream into audio file
- - [ ] Automate audio injection
+ - [x] Implant data stream into audio file
+ - [x] Automate audio injection
  - [ ] Extract data stream from audio file
  - [ ] Error Detection (only applicable to decoding)
  - [ ] (Potential encoding and decoding)
