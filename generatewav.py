@@ -47,26 +47,35 @@ if args.data:
 else:
 	s = input("Enter your data: ")
 
-print("Input Stream: " + (''.join(map(bin,bytearray(s, 'utf-8')))) + "\n")
-binout = ((''.join(map(bin,bytearray(s, 'utf-8')))).replace("b", "")).replace(" ", "")
-print("Binout: %s \n" % (binout))
-
 x = []
 l = []
 
+#------------------------------------------------------------------------------
+if args.data:
+	if file == "txt":
+		s = open(s, "r")
+		string_s = ""
+		for line in s:
+			string_s = string_s + line
+		s = string_s
+
+
+print("Input Stream: " + (''.join(map(bin,bytearray(s, 'utf-8')))) + "\n")
+binout = ((''.join(map(bin,bytearray(s, 'utf-8')))).replace("b", "")).replace(" ", "")
+print("Binout: %s \n" % (binout))
 #------------------------------------------------------------------------------
 # start sequence with start_sequence frequency
 hd.start(T, rate, x, start_sequence, samples)
 
 if head == "standard":
-	hd.standard(T, rate, x, f1, f2, samples)
-	hd.start(T, rate, x, start_sequence, samples)
+	hd.standard(T, rate, x, f1, f2, samples)						# set up header
+	hd.start(T, rate, x, start_sequence, samples)					# end header with start_sequence
 elif head == "short":
-	hd.short(T, rate, x, f1, f2, samples)
-	hd.start(T, rate, x, start_sequence, samples)
+	hd.short(T, rate, x, f1, f2, samples)							# set up header
+	hd.start(T, rate, x, start_sequence, samples)					# end header with start_sequence
 elif head == "custom":
-	hd.custom(T, rate, x, f1, f2, file, samples, ms, breaker_freq)
-	hd.start(T, rate, x, start_sequence, samples)
+	hd.custom(T, rate, x, f1, f2, file, samples, ms, breaker_freq)	# set up header
+	hd.start(T, rate, x, start_sequence, samples)					# end header with start_sequence
 
 # transform bitstream to corresponding frequency 
 for i in binout:
