@@ -16,13 +16,9 @@ parser.add_argument("-f1", action="store", dest="f1", type=float, default=2.0,
     help="Input low bit frequency")
 parser.add_argument("-f2", action="store", dest="f2", type=float, default=22048.0,
     help="Input high bit frequency")
-parser.add_argument("-start", action="store", dest="start", type=float, default=1.0,
-    help="Input high bit frequency")
-parser.add_argument("-stop", action="store", dest="stop", type=float, default=22050.0,
-    help="Input high bit frequency")
 parser.add_argument("-head", action="store", dest="header", type=str, default="standard", 
 	help="Choose which header to use")
-parser.add_argument("-t", action="store", dest="type", type=str, default="text",
+parser.add_argument("-t", action="store", dest="type", type=str, default="txt",
     help="Define the filetype to put in the custom header")
 args = parser.parse_args()
 
@@ -31,11 +27,12 @@ rate = args.rate
 filename = args.name
 file = args.type
 
-T = 1         # sample duration for each bit (seconds), can be changed using the ms down below
-f1 = args.f1   # sound frequency (Hz) for 0 bit
-f2 = args.f2   # sound frequency (Hz) for 1 bit
-start_sequence = args.start   # start frequencies
-stop_sequence = args.stop    # stop frequency
+T = 1         				# sample duration for each bit (seconds), can be changed using the ms down below
+f1 = args.f1   				# sound frequency (Hz) for 0 bit
+f2 = args.f2   				# sound frequency (Hz) for 1 bit
+start_sequence = 1.0   		# start frequencies
+stop_sequence = 22050.0    	# stop frequency
+breaker_freq = 4.0			# breaker frequency
 
 
 ms = 5; #milliseconds between each bit
@@ -58,7 +55,7 @@ x = []
 l = []
 
 #------------------------------------------------------------------------------
-# start sequence with 1800hz
+# start sequence with start_sequence frequency
 hd.start(T, rate, x, start_sequence, samples)
 
 if head == "standard":
@@ -68,7 +65,7 @@ elif head == "short":
 	hd.short(T, rate, x, f1, f2, samples)
 	hd.start(T, rate, x, start_sequence, samples)
 elif head == "custom":
-	hd.custom(T, rate, x, f1, f2, file, samples, ms)
+	hd.custom(T, rate, x, f1, f2, file, samples, ms, breaker_freq)
 	hd.start(T, rate, x, start_sequence, samples)
 
 # transform bitstream to corresponding frequency 
@@ -80,7 +77,7 @@ for i in binout:
 		x.append(np.sin(2*np.pi * f2 * t[:samples]))
 
 
-# end sequence with 4000hz
+# end sequence with stop_sequence frequency
 hd.stop(T, rate, x, stop_sequence, samples)
 #------------------------------------------------------------------------------
 

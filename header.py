@@ -27,15 +27,15 @@ def short(T, rate, x, f1, f2, samples):
 def standard(T, rate, x, f1, f2, samples):
 	writeheaderdata(T, rate, x, f1, f2, samples, "standard")
 
-def custom(T, rate, x, f1, f2, file, samples, ms):
+def custom(T, rate, x, f1, f2, file, samples, ms, breaker_freq):
 	writeheaderdata(T, 44100, x, 2.0, 22048.0, 44100//(1000//ms), "custom")
-
+	start(T, 44100, x, breaker_freq, 44100//(1000//ms))
 	writeheaderdata(T, 44100, x, 2.0, 22048.0, 44100//(1000//ms), str(f1))
-
+	start(T, 44100, x, breaker_freq, 44100//(1000//ms))
 	writeheaderdata(T, 44100, x, 2.0, 22048.0, 44100//(1000//ms), str(f2))
-
+	start(T, 44100, x, breaker_freq, 44100//(1000//ms))
 	writeheaderdata(T, 44100, x, 2.0, 22048.0, 44100//(1000//ms), str(rate))
-
+	start(T, 44100, x, breaker_freq, 44100//(1000//ms))
 	writeheaderdata(T, 44100, x, 2.0, 22048.0, 44100//(1000//ms), str(ms))
-
+	start(T, 44100, x, breaker_freq, 44100//(1000//ms))
 	writeheaderdata(T, 44100, x, 2.0, 22048.0, 44100//(1000//ms), str(file))
