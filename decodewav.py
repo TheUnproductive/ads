@@ -7,7 +7,8 @@ from pydub import AudioSegment
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
 import scipy.fftpack
-import scipy
+import scipy.signal
+import os
 
 parser = argparse.ArgumentParser(description="Start DoorPi with certain options")	
 parser.add_argument("-n", action="store", dest='name', type=str, default="h.wav",
@@ -38,6 +39,14 @@ output = []
 for i, chunk in enumerate(in_data[::ms]):
     output.append(chunk)
 
+print(output)
 
-peak_amplitude = output[0].get_array_of_samples()
-print(peak_amplitude)
+peaks = scipy.signal.find_peaks(output[0])
+
+print(peaks)
+
+#for i, chunk in enumerate(in_data[::ms]):
+#  with open("sounds/sound-%s.wav" % i, "wb") as f:
+#    chunk.export(f, format="wav")
+#
+#os.system("rm sounds/sound-*.wav")
