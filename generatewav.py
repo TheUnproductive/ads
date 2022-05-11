@@ -12,13 +12,13 @@ parser.add_argument("-n", action="store", dest='name', type=str, default="h",
     help="Manually configure filename")
 parser.add_argument("-d", action="store", dest="data", type=str,
     help="Input data to transform")
-parser.add_argument("-f1", action="store", dest="f1", type=float, default=1200.0,
+parser.add_argument("-f1", action="store", dest="f1", type=float, default=2.0,
     help="Input low bit frequency")
-parser.add_argument("-f2", action="store", dest="f2", type=float, default=2600.0,
+parser.add_argument("-f2", action="store", dest="f2", type=float, default=22048.0,
     help="Input high bit frequency")
-parser.add_argument("-start", action="store", dest="start", type=float, default=1800.0,
+parser.add_argument("-start", action="store", dest="start", type=float, default=1.0,
     help="Input high bit frequency")
-parser.add_argument("-stop", action="store", dest="stop", type=float, default=3600.0,
+parser.add_argument("-stop", action="store", dest="stop", type=float, default=22050.0,
     help="Input high bit frequency")
 parser.add_argument("-head", action="store", dest="header", type=str, default="standard", 
 	help="Choose which header to use")
@@ -68,7 +68,7 @@ elif head == "short":
 	hd.short(T, rate, x, f1, f2, samples)
 	hd.start(T, rate, x, start_sequence, samples)
 elif head == "custom":
-	hd.custom(T, rate, x, f1, f2, file, samples)
+	hd.custom(T, rate, x, f1, f2, file, samples, ms)
 	hd.start(T, rate, x, start_sequence, samples)
 
 # transform bitstream to corresponding frequency 
