@@ -35,19 +35,25 @@ The header_ending currently is just the start_sequence repeated.
 
 Space required (with default values): 95.8 KB
 
+## Command Line Arguments
+
 ## To-Do
 
  - [x] Create header to distinguish filetypes and frequencys used (implemented as `custom` header)
  - [ ] Implement different filetypes to encode
  - [ ] Figure out maximum usable sample rate and frequency
  - [ ] Figure out usage of multiple channels
- - [ ] Implant data stream into audio file
- - [ ] Automate audio injection
+ - [x] Implant data stream into audio file
+ - [x] Automate audio injection
  - [ ] Extract data stream from audio file
  - [ ] Error Detection (only applicable to decoding)
  - [ ] (Potential encoding and decoding)
 
 Some form of error detection comes with the custom header, since we use a predefined standard to store information like High-Bit / Low-Bit frequencies, sampling rate and sample duration.
+
+Note: Implanting works, but the implanted audio is very loud, a way to lower the volume still has to be found.
+
+If you don't specify a input file, you will get only the generated audio.
 
 ## Supported Filetypes
 

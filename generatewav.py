@@ -3,12 +3,18 @@ import wavio
 import numpy as np
 import argparse
 import header as hd
+from pydub import AudioSegment
 
+def combine(input_file, inject_file, output_file):
+	sound1 = AudioSegment.from_file(input_file)
+	sound2 = AudioSegment.from_file(inject_file)
+	combined = sound1.overlay(sound2)
+	combined.export(output_file, format='wav')
 
 parser = argparse.ArgumentParser(description="Start DoorPi with certain options")
 parser.add_argument("-r", action="store", dest='rate', type=int, default=44100,
 	help="Set sampling rate")	# samples per second, every second 44100 samples are used, for 100ms --> 44100/(1000/100)
-parser.add_argument("-n", action="store", dest='name', type=str, default="h",
+parser.add_argument("-n", action="store", dest='name', type=str, default="h.wav",
     help="Manually configure filename")
 parser.add_argument("-d", action="store", dest="data", type=str,
     help="Input data to transform")
@@ -20,6 +26,8 @@ parser.add_argument("-head", action="store", dest="header", type=str, default="s
 	help="Choose which header to use")
 parser.add_argument("-t", action="store", dest="type", type=str, default="txt",
     help="Define the filetype to put in the custom header")
+parser.add_argument("-in", action="store", dest="input", type=str)
+parser.add_argument("-out", action="store", dest="output", type=str, default="h.wav")
 args = parser.parse_args()
 
 head = args.header
@@ -96,4 +104,8 @@ for i in x:
 
 l = np.array(l)
 
-wavio.write(filename+".wav", l, rate, sampwidth=2)
+if args.input:
+	wavio.write(filename, l, rate, sampwidth=2)
+	combine(args.input, filename, args.output)
+else:
+	wavio.write(filename, l, rate, sampwidth=2)
