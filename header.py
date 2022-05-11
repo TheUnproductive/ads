@@ -28,14 +28,14 @@ def standard(T, rate, x, f1, f2, samples):
 	writeheaderdata(T, rate, x, f1, f2, samples, "standard")
 
 def custom(T, rate, x, f1, f2, file, samples, ms):
-	writeheaderdata(T, 44100, x, 2.0, 22048.0, samples, "custom")
+	writeheaderdata(T, 44100, x, 2.0, 22048.0, 44100//(1000//ms), "custom")
 
-	writeheaderdata(T, 44100, x, 2.0, 22048.0, samples, str(f1))
+	writeheaderdata(T, 44100, x, 2.0, 22048.0, 44100//(1000//ms), str(f1))
 
-	writeheaderdata(T, 44100, x, 2.0, 22048.0, samples, str(f2))
+	writeheaderdata(T, 44100, x, 2.0, 22048.0, 44100//(1000//ms), str(f2))
 
-	writeheaderdata(T, 44100, x, 2.0, 22048.0, samples, str(rate))
+	writeheaderdata(T, 44100, x, 2.0, 22048.0, 44100//(1000//ms), str(rate))
 
-	writeheaderdata(T, 44100, x, 2.0, 22048.0, samples, str(ms))
+	writeheaderdata(T, 44100, x, 2.0, 22048.0, 44100//(1000//ms), str(ms))
 
-	writeheaderdata(T, 44100, x, 2.0, 22048.0, samples, str(file))
+	writeheaderdata(T, 44100, x, 2.0, 22048.0, 44100//(1000//ms), str(file))
