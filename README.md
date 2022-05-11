@@ -49,6 +49,12 @@ Space required (with default values): 95.8 KB
 
 Some form of error detection comes with the custom header, since we use a predefined standard to store information like High-Bit / Low-Bit frequencies, sampling rate and sample duration.
 
+## Supported Filetypes
+
+ - [x] Text: txt
+ - [ ] Archives: zip, rar, 7z, tar
+ - [ ] Audio: wav, mp3, flac
+
 ## Credits
 
 This directory has been forked from https://github.com/stackbuffer/ads - all credits for the initial release go to him
