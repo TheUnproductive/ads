@@ -1,4 +1,4 @@
 ffmpeg.exe
 ffprobe.exe
-h.wav
-Schlaflied.mp3
+*.wav
+*.mp3
