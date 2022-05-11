@@ -20,7 +20,7 @@ parser.add_argument("-d", action="store", dest="data", type=str,
     help="Input data to transform")
 parser.add_argument("-f1", action="store", dest="f1", type=float, default=2.0,
     help="Input low bit frequency")
-parser.add_argument("-f2", action="store", dest="f2", type=float, default=22048.0,
+parser.add_argument("-f2", action="store", dest="f2", type=float, default=3.0,
     help="Input high bit frequency")
 parser.add_argument("-head", action="store", dest="header", type=str, default="standard", 
 	help="Choose which header to use")
@@ -39,7 +39,7 @@ T = 1         				# sample duration for each bit (seconds), can be changed using
 f1 = args.f1   				# sound frequency (Hz) for 0 bit
 f2 = args.f2   				# sound frequency (Hz) for 1 bit
 start_sequence = 1.0   		# start frequencies
-stop_sequence = 22050.0    	# stop frequency
+stop_sequence = 5.0    	# stop frequency
 breaker_freq = 4.0			# breaker frequency
 
 
