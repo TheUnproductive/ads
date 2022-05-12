@@ -46,6 +46,7 @@ for i, chunk in enumerate(in_data[::ms]):
     chunk.export(f, format="wav")
 
 files = os.listdir("sounds")
+out_list = []
 for i in files:
     filename = "sounds/" + i
     fs_rate, signal = wavfile.read(filename)
@@ -65,10 +66,14 @@ for i in files:
     FFT = scipy.fftpack.fft(signal)
     FFT = abs(FFT)
     FFT_side = FFT[range(N//2)] # one side FFT range
+    FFT_side = FFT_side[0:10]
     freqs = scipy.fftpack.fftfreq(signal.size, t[1]-t[0])
     fft_freqs = np.array(freqs)
     freqs_side = freqs[range(N//2)] # one side frequency range
     fft_freqs_side = np.array(freqs_side)
-    print(np.argmax(abs(FFT_side)))# plotting the positive fft spectrum
+    #np.delete(FFT_side, 0, None)
+    out_list.append(np.argmax(FFT_side)) # get index of maximum value
 
     os.system("rm " + filename)
+
+print(out_list)
