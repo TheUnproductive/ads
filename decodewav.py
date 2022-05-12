@@ -41,17 +41,13 @@ for i, chunk in enumerate(in_data[::ms]):
 
 print(output)
 
-peaks = scipy.signal.find_peaks(output[0])
-
-#for i, chunk in enumerate(in_data[::ms]):
-#  with open("sounds/sound-%s.wav" % i, "wb") as f:
-#    chunk.export(f, format="wav")
-#
-#os.system("rm sounds/sound-*.wav")
+for i, chunk in enumerate(in_data[::ms]):
+  with open("sounds/sound-%s.wav" % i, "wb") as f:
+    chunk.export(f, format="wav")
 
 files = os.listdir("sounds")
 for i in files:
-    filename = files[i]
+    filename = "sounds/" + i
     fs_rate, signal = wavfile.read(filename)
 
     print ("Frequency sampling", fs_rate)
@@ -73,16 +69,6 @@ for i in files:
     fft_freqs = np.array(freqs)
     freqs_side = freqs[range(N//2)] # one side frequency range
     fft_freqs_side = np.array(freqs_side)
-    plt.subplot(311)
-    p1 = plt.plot(t, signal, "g") # plotting the signal
-    plt.xlabel('Time')
-    plt.ylabel('Amplitude')
-    plt.subplot(312)
-    p2 = plt.plot(freqs, FFT, "r") # plotting the complete fft spectrum
-    plt.xlabel('Frequency (Hz)')
-    plt.ylabel('Count dbl-sided')
-    plt.subplot(313)
-    p3 = plt.plot(freqs_side, abs(FFT_side), "b") # plotting the positive fft spectrum
-    plt.xlabel('Frequency (Hz)')
-    plt.ylabel('Count single-sided')
-    plt.show()
+    print(np.argmax(abs(FFT_side)))# plotting the positive fft spectrum
+
+    os.system("rm " + filename)
