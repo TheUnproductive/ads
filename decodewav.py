@@ -39,9 +39,15 @@ output = []
 for i, chunk in enumerate(in_data[::ms]):
     output.append(chunk)
 
+print(output)
 
-peak_amplitude = output[0].get_array_of_samples()
-print(peak_amplitude)
+peaks = scipy.signal.find_peaks(output[0])
+
+#for i, chunk in enumerate(in_data[::ms]):
+#  with open("sounds/sound-%s.wav" % i, "wb") as f:
+#    chunk.export(f, format="wav")
+#
+#os.system("rm sounds/sound-*.wav")
 
 files = os.listdir("sounds")
 for i in files:
