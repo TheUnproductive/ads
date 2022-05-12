@@ -12,7 +12,7 @@ def combine(input_file, inject_file, output_file):
 	combined = sound1.overlay(sound2)
 	combined.export(output_file, format='wav')
 
-parser = argparse.ArgumentParser(description="Start DoorPi with certain options")
+parser = argparse.ArgumentParser(description="Encrypt wav file")
 parser.add_argument("-r", action="store", dest='rate', type=int, default=44100,
 	help="Set sampling rate")	# samples per second, every second 44100 samples are used, for 100ms --> 44100/(1000/100)
 parser.add_argument("-d", action="store", dest="data", type=str,
