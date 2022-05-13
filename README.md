@@ -40,6 +40,16 @@ Space required (with default values): 95.8 KB
 
 ## Command Line Arguments
 
+## Spectrum Analysis Example
+
+The Decoder currently output a file with the complete spectrum analysis. It will look something like this:
+
+[](fig.png)
+
+If we zoom in on the header area we get this:
+
+[](fig_zoom_header.png)
+
 ## To-Do
 
  - [x] Create header to distinguish filetypes and frequencys used (implemented as `custom` header)
