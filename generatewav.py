@@ -13,13 +13,13 @@ def combine(input_file, inject_file, output_file):
 	combined.export(output_file, format='wav')
 
 parser = argparse.ArgumentParser(description="Encrypt wav file")
-parser.add_argument("-r", action="store", dest='rate', type=int, default=44100,
+parser.add_argument("-r", action="store", dest='rate', type=int, default=48000,
 	help="Set sampling rate")	# samples per second, every second 44100 samples are used, for 100ms --> 44100/(1000/100)
 parser.add_argument("-d", action="store", dest="data", type=str,
     help="Input data to transform")
-parser.add_argument("-f1", action="store", dest="f1", type=float, default=2.0,
+parser.add_argument("-f1", action="store", dest="f1", type=float, default=22000.0,
     help="Input low bit frequency")
-parser.add_argument("-f2", action="store", dest="f2", type=float, default=3.0,
+parser.add_argument("-f2", action="store", dest="f2", type=float, default=23000.0,
     help="Input high bit frequency")
 parser.add_argument("-head", action="store", dest="header", type=str, default="standard", 
 	help="Choose which header to use")
@@ -36,9 +36,6 @@ file = args.type
 T = 1         				# sample duration for each bit (seconds), can be changed using the ms down below
 f1 = args.f1   				# sound frequency (Hz) for 0 bit
 f2 = args.f2   				# sound frequency (Hz) for 1 bit
-start_sequence = 1.0   		# start frequencies
-stop_sequence = 5.0    		# stop frequency
-breaker_freq = 4.0			# breaker frequency
 
 
 ms = 5; #milliseconds between each bit
@@ -69,19 +66,24 @@ if args.data:
 print("Input Stream: " + (''.join(map(bin,bytearray(s, 'utf-8')))) + "\n")
 binout = ((''.join(map(bin,bytearray(s, 'utf-8')))).replace("b", "")).replace(" ", "")
 print("Binout: %s \n" % (binout))
+file_len = len(binout)
 #------------------------------------------------------------------------------
 # start sequence with start_sequence frequency
-hd.start(T, rate, x, start_sequence, samples)
 
 if head == "standard":
-	hd.standard(T, rate, x, f1, f2, samples)						# set up header
-	hd.start(T, rate, x, start_sequence, samples)					# end header with start_sequence
+	header_bits = len(bin(ms)) + len(bin(file_len))
+	print(header_bits)
+	hd.writeheaderdata_padded(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), header_bits)
+	hd.standard(T, rate, x, f1, f2, samples, ms, file_len)						# set up header
 elif head == "short":
+	header_bits = len(bin(ms)) + len(bin(file_len))
+	hd.writeheaderdata(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), str(header_bits))
 	hd.short(T, rate, x, f1, f2, samples)							# set up header
-	hd.start(T, rate, x, start_sequence, samples)					# end header with start_sequence
 elif head == "custom":
-	hd.custom(T, rate, x, f1, f2, file, samples, ms, breaker_freq)	# set up header
-	hd.start(T, rate, x, start_sequence, samples)					# end header with start_sequence
+	header_bits = len(bin(int(f1))) + len(bin(int(f2))) + len(bin(rate)) + len(bin(ms)) + len(bin(file_len))
+	print(header_bits)
+	hd.writeheaderdata(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), str(header_bits))
+	hd.custom(T, rate, x, f1, f2, file, samples, ms, file_len)	# set up header
 
 # transform bitstream to corresponding frequency 
 for i in binout:
@@ -91,9 +93,6 @@ for i in binout:
 	if i == '1':
 		x.append(np.sin(2*np.pi * f2 * t[:samples]))
 
-
-# end sequence with stop_sequence frequency
-hd.stop(T, rate, x, stop_sequence, samples)
 #------------------------------------------------------------------------------
 
 for i in x:
