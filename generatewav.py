@@ -21,7 +21,7 @@ parser.add_argument("-f1", action="store", dest="f1", type=float, default=22000.
     help="Input low bit frequency")
 parser.add_argument("-f2", action="store", dest="f2", type=float, default=23000.0,
     help="Input high bit frequency")
-parser.add_argument("-head", action="store", dest="header", type=str, default="standard", 
+parser.add_argument("-head", action="store", dest="header", type=str, default="short", 
 	help="Choose which header to use")
 parser.add_argument("-t", action="store", dest="type", type=str, default="txt",
     help="Define the filetype to put in the custom header")
@@ -31,7 +31,7 @@ args = parser.parse_args()
 
 head = args.header
 rate = args.rate
-file = args.type
+file_type = "txt" #args.type
 
 T = 1         				# sample duration for each bit (seconds), can be changed using the ms down below
 f1 = args.f1   				# sound frequency (Hz) for 0 bit
@@ -55,7 +55,7 @@ l = []
 
 #------------------------------------------------------------------------------
 if args.data:
-	if file == "txt":
+	if file_type == "txt":
 		s = open(s, "r")
 		string_s = ""
 		for line in s:
@@ -67,6 +67,7 @@ print("Input Stream: " + (''.join(map(bin,bytearray(s, 'utf-8')))) + "\n")
 binout = ((''.join(map(bin,bytearray(s, 'utf-8')))).replace("b", "")).replace(" ", "")
 print("Binout: %s \n" % (binout))
 file_len = len(binout)
+print(file_len)
 #------------------------------------------------------------------------------
 # start sequence with start_sequence frequency
 
@@ -76,14 +77,15 @@ if head == "standard":
 	hd.writeheaderdata_padded(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), header_bits)
 	hd.standard(T, rate, x, f1, f2, samples, ms, file_len)						# set up header
 elif head == "short":
-	header_bits = len(bin(ms)) + len(bin(file_len))
-	hd.writeheaderdata(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), str(header_bits))
-	hd.short(T, rate, x, f1, f2, samples)							# set up header
-elif head == "custom":
-	header_bits = len(bin(int(f1))) + len(bin(int(f2))) + len(bin(rate)) + len(bin(ms)) + len(bin(file_len))
+	header_bits = len(bin(file_len))
 	print(header_bits)
-	hd.writeheaderdata(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), str(header_bits))
-	hd.custom(T, rate, x, f1, f2, file, samples, ms, file_len)	# set up header
+	hd.writeheaderdata_padded(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), header_bits)
+	hd.short(T, rate, x, f1, f2, ms, file_len)							# set up header
+elif head == "custom":
+	header_bits = len(bin(int(f1//1000))) + len(bin(int(f2//1000))) + len(bin(rate//1000)) + len(bin(5)) + len(bin(file_len)) + 8 * 3
+	print(header_bits)
+	hd.writeheaderdata_padded(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), header_bits)
+	hd.custom(T, rate, x, f1, f2, file_len, ms, file_type)	# set up header
 
 # transform bitstream to corresponding frequency 
 for i in binout:

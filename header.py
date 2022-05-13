@@ -33,7 +33,7 @@ def writeheaderdata_int(T, rate, x, f1, f2, samples, integer):
 			x.append(np.sin(2*np.pi * f2 * t[:samples]))
 
 def writeheaderdata_padded(T, rate, x, f1, f2, samples, binary):
-	binpref = format(binary, '#013b').replace("0b", "")
+	binpref = format(binary, '#009b').replace("0b", "")
 	print(binpref)
 	for i in binpref:
 		t = np.linspace(0, T, T*rate, endpoint=False)
@@ -42,17 +42,18 @@ def writeheaderdata_padded(T, rate, x, f1, f2, samples, binary):
 		if i == '1':
 			x.append(np.sin(2*np.pi * f2 * t[:samples]))
 
-def short(T, rate, x, f1, f2, samples):
+def short(T, rate, x, f1, f2, ms, file_len):
 	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), file_len)
 
 def standard(T, rate, x, f1, f2, samples, ms, file_len):
 	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), ms)
 	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), file_len)
 
-def custom(T, rate, x, f1, f2, samples, ms, file, file_len):
-	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), f1)
-	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), f2)
-	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), rate//1000)
+def custom(T, rate, x, f1, f2, file_len, ms=5, file_type="txt"):
+	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), int(f1//1000))
+	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), int(f2//1000))
+	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), int(rate//1000))
 	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), ms)
-	writeheaderdata(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), str(file))
+	print("file_type " + file_type)
+	writeheaderdata(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), str(file_type))
 	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), file_len)

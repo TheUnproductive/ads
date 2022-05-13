@@ -37,7 +37,7 @@ rate, data = wavfile.read(filename)
 
 print(rate)
     
-f, t, Sxx = signal.spectrogram(data, rate, nperseg=512)  # t starts at 1 ms as index 0
+f, t, Sxx = signal.spectrogram(data, rate)  # t starts at 1 ms as index 0
 
 print(Sxx)
 

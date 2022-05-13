@@ -44,7 +44,7 @@ Space required (with default values): 95.8 KB
 
  - [x] Create header to distinguish filetypes and frequencys used (implemented as `custom` header)
  - [ ] Implement different filetypes to encode
- - [ ] Figure out maximum usable sample rate and frequency
+ - [ ] Figure out minimum/maximum usable sample rate and frequency
  - [ ] Figure out usage of multiple channels
  - [x] Implant data stream into audio file
  - [x] Automate audio injection
