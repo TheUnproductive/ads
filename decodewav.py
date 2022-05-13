@@ -36,10 +36,10 @@ rate, data = wavfile.read(filename)
 # rate=48000, data.shape=(46447, 2) ~ almost 1s of stereo signal
 
 print(rate)
-    
-f, t, Sxx = signal.spectrogram(data, rate)  # t starts at 1 ms as index 0
 
-print(Sxx)
+header_len_data = data[:1750]
+
+f, t, Sxx = signal.spectrogram(header_len_data, rate)  # t starts at 1 ms as index 0
 
 plt.pcolormesh(t, f, Sxx)
 plt.ylabel('Frequency [Hz]')
