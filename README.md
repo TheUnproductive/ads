@@ -44,11 +44,11 @@ Space required (with default values): 95.8 KB
 
 The Decoder currently output a file with the complete spectrum analysis. It will look something like this:
 
-[](fig.png)
+[](./fig.png)
 
 If we zoom in on the header area we get this:
 
-[](fig_zoom_header.png)
+[](./fig_zoom_header.png)
 
 ## To-Do
 
