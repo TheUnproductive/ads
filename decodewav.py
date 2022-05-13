@@ -44,5 +44,13 @@ f, t, Sxx = signal.spectrogram(header_len_data, rate)  # t starts at 1 ms as ind
 plt.pcolormesh(t, f, Sxx)
 plt.ylabel('Frequency [Hz]')
 plt.xlabel('Time [sec]')
-plt.savefig("fig.png")
+plt.savefig("data.png")
 plt.show()
+
+"""
+for freq in header_len_data_sxx:
+    if (freq - f1 > freq - f2):
+        bit = 0
+    else:
+        bit = 1
+"""
