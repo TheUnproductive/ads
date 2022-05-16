@@ -51,7 +51,7 @@ plt.xlabel('Time [sec]')
 plt.savefig("data.png")
 plt.show()
 
-print(Sxx)
+#print(Sxx)
 
 """
 for freq in header_len_data_sxx:

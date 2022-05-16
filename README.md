@@ -12,6 +12,10 @@ Also you will need to make sure to have ffmpeg and ffprobe installed.
 
 If you want to use sine waves above human hearing, the sampling rate needs to comply with the frequency you are using, eg.: If you want to use frequencies above 22 kHz the sampling rate has to be comply to `sampling_rate = maximum_frequency * 2`. Currently the output has to be combined manually, but i am looking for an option to automate this process.
 
+| :warning: WARNING          |
+|:---------------------------|
+| I should warn you that currently only the encoding and injecting works. I am working on a solution to decode the data.|
+
 ## File structure
 
 The generated audio file will start with a 7 bit long header_len section. This section encodes the bit length of the header (ranging from 0 to 127 bits long). Following this are a maximum of 127 bits as header. It is split up as follows:
@@ -61,7 +65,7 @@ If we zoom in on the header area we get this:
  - [x] Automate audio injection
  - [ ] Extract data stream from audio file
  - [ ] Error Detection (only applicable to decoding)
- - [ ] (Potential encoding and decoding)
+ - [ ] (Potential encrypting and decrypting)
 
 Some form of error detection comes with the custom header, since we use a predefined standard to store information like High-Bit / Low-Bit frequencies, sampling rate and sample duration.
 
