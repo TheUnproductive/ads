@@ -13,6 +13,7 @@ from pydub import AudioSegment
 parser = argparse.ArgumentParser(description="Decrypt wav file")	
 parser.add_argument("-n", action="store", dest='name', type=str, default="h.wav",
     help="Manually configure filename")
+parser.add_argument("-in", action="store", dest='intype', type=str, default="")
 args = parser.parse_args()
 
 rate = 48000    # samples per second, every second 44100 samples are used, for 100ms --> 44100/(1000/100)
@@ -35,17 +36,22 @@ if f1 > rate//2 or f2 > rate//2:
 rate, data = wavfile.read(filename)
 # rate=48000, data.shape=(46447, 2) ~ almost 1s of stereo signal
 
+if args.intype == "audio":
+    data = data[:,0]
+
 print(rate)
 
-header_len_data = data[:1750]
+header_len_data = data[:5800]
 
-f, t, Sxx = signal.spectrogram(header_len_data, rate)  # t starts at 1 ms as index 0
+f, t, Sxx = signal.spectrogram(data, rate, mode="magnitude", nperseg=270)  # t starts at 1 ms as index 0
 
 plt.pcolormesh(t, f, Sxx)
 plt.ylabel('Frequency [Hz]')
 plt.xlabel('Time [sec]')
 plt.savefig("data.png")
 plt.show()
+
+print(Sxx)
 
 """
 for freq in header_len_data_sxx:

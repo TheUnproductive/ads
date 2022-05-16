@@ -12,31 +12,32 @@ Also you will need to make sure to have ffmpeg and ffprobe installed.
 
 If you want to use sine waves above human hearing, the sampling rate needs to comply with the frequency you are using, eg.: If you want to use frequencies above 22 kHz the sampling rate has to be comply to `sampling_rate = maximum_frequency * 2`. Currently the output has to be combined manually, but i am looking for an option to automate this process.
 
+## File structure
+
+The generated audio file will start with a 7 bit long header_len section. This section encodes the bit length of the header (ranging from 0 to 127 bits long). Following this are a maximum of 127 bits as header. It is split up as follows:
+
 ## Header Types
-
-### Standard
-
-This header will be used as a standard, basically all of the settings are unchanged.
-
-Space required: ca. 29.2 KB
 
 ### Short
 
-This header is basically the same as the standard header, except that it takes up less space.
+This header consists of a single indicator bit followed by up to 126 bits containing the data_len section. (max. data amount: 7.24*10^75 bits)
 
-Space required: ca. 5.92 KB
+The indicator bit will always be 0 for a short header.
 
-### Custom
 
-This header is to be used when encoding with different frequencies and sampling rates.
+### Long / Custom
 
-It will create a header with data as follows:
+The long (or custom) header contains all metadata in case any of it was changed for the rest of the file.
 
-`start_sequence -> "custom" -> breaker_freq -> f1 -> breaker_freq -> f2 -> breaker_freq -> rate -> breaker_freq -> ms -> breaker_freq -> filetype -> header_ending`
+It is setup as follows:
 
-The header_ending currently is just the start_sequence repeated.
-
-Space required (with default values): 95.8 KB
+ - 1 indicator bit (always set to 1)
+ - 6 bits encoding the low bit frequency (in kHz)
+ - 6 bits encoding the high bit frequency (in kHz)
+ - 7 bits encoding the sampling rate (in kHz)
+ - 4 bits encoding the ms value
+ - 24 bits encoding the file type contained in the wav output (as a string)
+ - up to 79 bits encoding data_len (max data amount: 3.65*10^47 bits)
 
 ## Command Line Arguments
 

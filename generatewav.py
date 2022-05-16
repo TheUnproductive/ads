@@ -8,7 +8,7 @@ from pydub import AudioSegment
 def combine(input_file, inject_file, output_file):
 	sound1 = AudioSegment.from_file(input_file)
 	inject_raw = AudioSegment.from_file(inject_file)
-	sound2 = inject_raw - 55
+	sound2 = inject_raw - 5
 	combined = sound1.overlay(sound2)
 	combined.export(output_file, format='wav')
 
@@ -77,12 +77,12 @@ if head == "standard":
 	hd.writeheaderdata_padded(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), header_bits)
 	hd.standard(T, rate, x, f1, f2, samples, ms, file_len)						# set up header
 elif head == "short":
-	header_bits = len(bin(file_len))
+	header_bits = len(bin(file_len)) - 1
 	print(header_bits)
 	hd.writeheaderdata_padded(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), header_bits)
 	hd.short(T, rate, x, f1, f2, ms, file_len)							# set up header
 elif head == "custom":
-	header_bits = len(bin(int(f1//1000))) + len(bin(int(f2//1000))) + len(bin(rate//1000)) + len(bin(5)) + len(bin(file_len)) + 8 * 3
+	header_bits = len(bin(int(f1//1000))) + len(bin(int(f2//1000))) + len(bin(rate//1000)) + len(bin(5)) + len(bin(file_len)) + 8 * 3 - 9
 	print(header_bits)
 	hd.writeheaderdata_padded(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), header_bits)
 	hd.custom(T, rate, x, f1, f2, file_len, ms, file_type)	# set up header

@@ -43,6 +43,7 @@ def writeheaderdata_padded(T, rate, x, f1, f2, samples, binary):
 			x.append(np.sin(2*np.pi * f2 * t[:samples]))
 
 def short(T, rate, x, f1, f2, ms, file_len):
+	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), 0)
 	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), file_len)
 
 def standard(T, rate, x, f1, f2, samples, ms, file_len):
@@ -50,6 +51,7 @@ def standard(T, rate, x, f1, f2, samples, ms, file_len):
 	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), file_len)
 
 def custom(T, rate, x, f1, f2, file_len, ms=5, file_type="txt"):
+	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), 1)
 	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), int(f1//1000))
 	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), int(f2//1000))
 	writeheaderdata_int(T, 48000, x, 22000.0, 23000.0, 48000//(1000//ms), int(rate//1000))
