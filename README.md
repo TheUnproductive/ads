@@ -57,7 +57,7 @@ If we zoom in on the header area we get this:
 
 ## To-Do
 
- - [x] Create header to distinguish filetypes and frequencys used (implemented as `custom` header)
+ - [x] Create header to distinguish filetypes and frequencys used (implemented as `long/custom` header)
  - [ ] Implement different filetypes to encode
  - [ ] Figure out minimum/maximum usable sample rate and frequency
  - [ ] Figure out usage of multiple channels
@@ -77,7 +77,7 @@ If you don't specify a input file, you will get only the generated audio.
 
  - [x] Text: txt
  - [ ] Archives: zip, rar, 7z, tar
- - [ ] Audio: wav, mp3, flac
+ - [ ] Audio: wav, mp3 (potentially flac or alac)
 
 ## Credits
 
