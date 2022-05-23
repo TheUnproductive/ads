@@ -45,6 +45,22 @@ It is setup as follows:
 
 ## Command Line Arguments
 
+### During generation of wav file:
+
+ - `-r` sets the sampling rate off the output wav file (default: 48000 Hz)
+ - `-d` is used to parse inpt from a file
+ - `-t` is used to set the file_type of the input data (defaults to txt)
+ - `-f1` sets the low bit frequency (defaults to 22000.0 Hz)
+ - `-f2`sets the high bit frequency (defaults to 23000.0 Hz)
+ - `-head` is used to choose the header which will be encoded (defaults to short)
+ - `-in` is used to choose a audio file into which the generated wav will be injected
+ - `-out` sets the filename for the generated wav file (defaults to out.wav)
+
+### During decoding of wav file:
+
+ - `-n` sets the filename of the file to decode (defaults to out.wav)
+ - `-in` is similar to `-t`, sets the filetype for the output
+
 ## Spectrum Analysis Example
 
 The Decoder currently output a file with the complete spectrum analysis. It will look something like this:
@@ -66,6 +82,7 @@ If we zoom in on the header area we get this:
  - [ ] Extract data stream from audio file
  - [ ] Error Detection (only applicable to decoding)
  - [ ] (Potential encrypting and decrypting)
+ - [ ] Test decoding over 
 
 Some form of error detection comes with the custom header, since we use a predefined standard to store information like High-Bit / Low-Bit frequencies, sampling rate and sample duration.
 
