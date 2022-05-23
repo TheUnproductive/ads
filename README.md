@@ -82,7 +82,7 @@ If we zoom in on the header area we get this:
  - [ ] Extract data stream from audio file
  - [ ] Error Detection (only applicable to decoding)
  - [ ] (Potential encrypting and decrypting)
- - [ ] Test decoding over 
+ - [ ] Test decoding over radio waves
 
 Some form of error detection comes with the custom header, since we use a predefined standard to store information like High-Bit / Low-Bit frequencies, sampling rate and sample duration.
 
