@@ -11,7 +11,7 @@ import os
 from pydub import AudioSegment
 
 parser = argparse.ArgumentParser(description="Decrypt wav file")	
-parser.add_argument("-n", action="store", dest='name', type=str, default="h.wav",
+parser.add_argument("-n", action="store", dest='name', type=str, default="out.wav",
     help="Manually configure filename")
 parser.add_argument("-in", action="store", dest='intype', type=str, default="")
 args = parser.parse_args()

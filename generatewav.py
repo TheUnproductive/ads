@@ -26,7 +26,7 @@ parser.add_argument("-head", action="store", dest="header", type=str, default="s
 parser.add_argument("-t", action="store", dest="type", type=str, default="txt",
     help="Define the filetype to put in the custom header")
 parser.add_argument("-in", action="store", dest="input", type=str)
-parser.add_argument("-out", action="store", dest="output", type=str, default="h.wav")
+parser.add_argument("-out", action="store", dest="output", type=str, default="out.wav")
 args = parser.parse_args()
 
 head = args.header
