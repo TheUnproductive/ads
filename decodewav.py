@@ -51,8 +51,6 @@ plt.xlabel('Time [sec]')
 plt.savefig("data.png")
 plt.show()
 
-#print(Sxx)
-
 """
 for freq in header_len_data_sxx:
     if (freq - f1 > freq - f2):
